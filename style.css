@@ -35,6 +35,8 @@ body {
     font-size: 20px;
     height: 40px;
     margin: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
     padding-bottom: 3px;
     text-align: center;
     transition: all 0.25s ease-in-out;
@@ -192,59 +194,21 @@ body {
 
 @media screen and (max-width: 450px) {
     .roll {
-        background-color: rgb(107, 7, 30);
-        border: none;
-        border-radius: 50%;
-        box-shadow: 0px 0px 10px black;
-        color: whitesmoke;
-        cursor: pointer;
-        font-family: 'Silkscreen', cursive;
         font-size: 28px;
-        height: 125px;
-        margin-bottom: 25px;
-        margin-top: 20px;
         padding-left: 1px;
         padding-right: 1px;
-        padding-bottom: 7px;
         text-align: center;
         transition: none;
-        width: 125px;
     }
 
     .roll:hover {
-        background-color: rgb(163, 11, 18);
-        box-shadow: 0px 0px 15px black;
         font-size: 28px;
         transform: none;
         transition: none;
     }
 
     .roll:active {
-        background-color: rgb(211, 15, 24);
-        box-shadow: 0px 0px 15px black;
         transition: none;
     }
 
-    .dice-button {
-        background-color: rgb(223, 204, 182);
-        border: 3px solid rgb(179, 159, 135);
-        border-radius: 8px;
-        cursor: pointer;
-        font-family: 'Silkscreen', cursive;
-        font-size: 20px;
-        height: 40px;
-        margin: 5px;
-        padding-left: 0px;
-        padding-right: 0px;
-        padding-bottom: 3px;
-        text-align: center;
-        transition: all 0.25s ease-in-out;
-        width: 65px;
-        color: black;
-    }
-
-    .dice-button:hover {
-        background-color: rgb(241, 228, 213);
-        transition: all 0.25s ease-in-out;
-    }
 }
