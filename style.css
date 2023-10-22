@@ -5,6 +5,7 @@ body {
     font-family: 'Silkscreen', cursive;
     justify-content: center;
     margin-top: 25px;
+    user-select: none;
 }
 
 .hidden {
@@ -209,6 +210,16 @@ body {
 
     .roll:active {
         transition: none;
+    }
+
+    .holder {
+        max-width: 95%;
+        width: 95%;
+    }
+
+    .top-holder {
+        max-width: 95%;
+        width: 95%;
     }
 
 }
