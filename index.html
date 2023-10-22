@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+        <title>Dice Rolls</title>
+    </head>
+
+    <body>
+        <div class="top-holder" id="content">
+            <div class="dice-select">
+                <h1 class="select-title">Select Your Dice</h1>
+                <button class="dice-button" id="dice-button1" aria-label="Select a 4-sided dice (d4)"
+                    title="Select a 4-sided dice">d4</button>
+                <button class="dice-button" id="dice-button2" aria-label="Select a 6-sided dice (d6)"
+                    title="Select a 6-sided dice">d6</button>
+                <button class="dice-button" id="dice-button3" aria-label="Select a 8-sided dice (d8)"
+                    title="Select a 8-sided dice">d8</button><br>
+                <button class="dice-button" id="dice-button4" aria-label="Select a 10-sided dice (d10)"
+                    title="Select a 10-sided dice">d10</button>
+                <button class="dice-button" id="dice-button5" aria-label="Select a 12-sided dice (d12)"
+                    title="Select a 12-sided dice">d12</button>
+                <button class="dice-button" id="dice-button6" aria-label="Select a 20-sided dice (d20)"
+                    title="Select a 20-sided dice">d20</button>
+            </div>
+        </div>
+
+        <div class="main-container hidden" id="main-container">
+            <div class="holder">
+
+                <div>
+                    <h1 class="main-header">Selected Dice: <span class="main-header-sub" id="selected-dice"
+                            aria-live="polite"></span>
+                    </h1>
+                    <div class="num-of-dice-container">
+                        <label for="num-of-dice" class="how-many">How many dice to roll: </label>
+                        <input type="text" class="num-of-dice" id="num-of-dice" min="1" max="99" step="1" value="1"
+                            pattern="[1-9][0-9]?" maxlength="2" aria-labelledby="num-of-dice how-many">
+                    </div>
+                    <button class="roll" id="roll-the-dice" aria-label="Roll the selected dice">Roll</button>
+                    <p class="roll-result-container"><span id="roll-result" class="roll-result-numbers"
+                            aria-live="assertive" aria-atomic="true"></span></p>
+                </div>
+
+                <div class="dice-change hidden" id="dice-change">
+                    <button class="change-button" aria-label="Change the selected dice">Change Dice</button>
+                </div>
+
+            </div>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+
+</html>
