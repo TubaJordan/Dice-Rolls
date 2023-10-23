@@ -44,6 +44,7 @@
         </div>
 
         <div class="main-container hidden" id="main-container">
+
             <div class="holder">
 
                 <div>
@@ -60,11 +61,21 @@
                             aria-live="assertive" aria-atomic="true"></span></p>
                 </div>
 
-                <div class="dice-change hidden" id="dice-change">
-                    <button class="change-button" aria-label="Change the selected dice">Change Dice</button>
+                <div class="bottom-buttons">
+                    <div class="expand-holder">
+                        <button id="expandLogButton" class="expand-button">Expand Results Log</button>
+                    </div>
+                    <div class="dice-change hidden" id="dice-change">
+                        <button class="change-button" aria-label="Change the selected dice">Change Dice</button>
+                    </div>
                 </div>
 
             </div>
+
+            <div class="log-container-wrapper">
+                <div class="log-container"></div>
+            </div>
+
         </div>
 
         <script src="app.js"></script>

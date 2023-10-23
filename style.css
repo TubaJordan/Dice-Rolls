@@ -9,12 +9,19 @@ body {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .select-title,
 .main-container {
     text-align: center;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .select-title {
@@ -160,19 +167,40 @@ body {
 
 .change-button {
     background-color: rgb(179, 159, 135);
-    border: 1px solid black;
-    border: 2px solid rgb(179, 159, 135);
+    border: none;
+    font-size: 12px;
     border-radius: 8px;
     cursor: pointer;
     font-family: 'Silkscreen', cursive;
     padding-bottom: 2px;
     transition: all 0.25s ease-in-out;
     color: black;
+    height: 20px;
 }
 
 .change-button:hover {
     background-color: rgb(139, 124, 105);
-    border: 2px solid rgb(139, 124, 105);
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+}
+
+.expand-button {
+    background-color: rgb(179, 159, 135);
+    border: none;
+    font-size: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Silkscreen', cursive;
+    padding-bottom: 2px;
+    transition: all 0.25s ease-in-out;
+    color: black;
+    height: 20px;
+}
+
+.expand-button:hover {
+    background-color: rgb(139, 124, 105);
+    border: none;
     cursor: pointer;
     transition: all 0.25s ease-in-out;
 }
@@ -192,6 +220,53 @@ body {
     border-top: 1px solid rgb(179, 159, 135);
     margin-top: 20px;
 }
+
+.sub-container {
+    display: flex;
+}
+
+.log-container {
+    padding: 20px;
+    width: 250px;
+    max-height: 300px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    text-align: center;
+    align-self: center;
+    -webkit-mask-image: radial-gradient(circle, black 100%, transparent 100%);
+    mask-image: radial-gradient(circle, black 100%, transparent 100%);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
+    background-color: rgb(248, 224, 195);
+}
+
+.log-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.log-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.log-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+}
+
+.log-container-wrapper {
+    box-shadow: 3px 3px 10px black;
+    overflow: hidden;
+    width: 250px;
+    align-self: center;
+    border: 3px solid rgb(179, 159, 135);
+    border-top: none;
+}
+
+.bottom-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
 
 @media screen and (max-width: 450px) {
     .roll {

@@ -35,6 +35,8 @@ rollTheDice.addEventListener("click", rollDiceClick);
 rollButton.addEventListener("click", rollDiceClick);
 
 function rollDiceClick() {
+
+    rollCount++
     let numOfDice = parseInt(numOfDiceInput.value);
 
     if (isNaN(numOfDice) || numOfDice <= 0 || numOfDice > 99) {
@@ -76,7 +78,7 @@ function rollDiceClick() {
     let averageResults = Math.round(totalRollResult / individualResults.length);
 
     if (individualResults.length === 1) {
-        return rollResult.innerHTML = `<span class="result-text">Result</span> 
+        rollResult.innerHTML = `<span class="result-text">Result</span> 
         <div class="line">
         </div><p class="individual-rolls">Your Roll: </p>
         ${individualResults.join(", ")}
@@ -92,6 +94,85 @@ function rollDiceClick() {
         ${averageResults}
         <div class="lineBottom"></div>`;
     }
+
+    resultsArray.push({
+        individualResults: individualResults,
+        total: totalRollResult,
+        average: averageResults,
+        diceType: selectedDiceType,
+        numOfDice: numOfDice,
+        rollNumber: rollCount
+    });
+    updateLog();
+
+}
+
+let rollCount = 0;
+
+function formatResults(result) {
+
+    if (result.numOfDice === 1) {
+        return `<div class="log-entry">
+            <div>Roll #${result.rollNumber}</div>
+            <div>Dice: ${result.diceType} x 1</div>
+            <div>Result: ${result.individualResults.join(", ")}</div>
+        </div>
+        <div class="lineBottom"></div>
+        <br>`
+    } else {
+        return `<div class="log-entry">
+            <div>Roll #${result.rollNumber}</div>
+            <div>Dice: ${result.diceType} x ${result.numOfDice}</div>
+            <div>Rolls: ${result.individualResults.join(", ")}</div>
+            <div>Total: ${result.total}</div>
+            <div>Average: ${result.average}</div>
+        </div>
+        <div class="lineBottom"></div>
+        <br>`;
+    }
+}
+
+let resultsArray = [];
+
+const expandLogButton = document.getElementById("expandLogButton");
+const logContainer = document.querySelector(".log-container");
+
+expandLogButton.addEventListener("click", () => {
+
+    if (resultsArray.length > 0) {
+        Array.from(logContainer.children).forEach(child => {
+            if (child !== expandLogButton) {
+                if (child.style.display === "none" || !child.style.display) {
+                    child.style.display = "block";
+                } else {
+                    child.style.display = "none";
+                }
+            }
+        });
+        expandLogButton.innerText = expandLogButton.innerText.startsWith("Expand") ? "Close Results Log" : "Expand Results Log";
+    }
+});
+
+let isLogExpanded = false;
+
+function updateLog() {
+    const logContainer = document.querySelector(".log-container");
+    const currentLogContent = logContainer.innerHTML;
+
+    logContainer.innerHTML = "";
+    resultsArray.slice().reverse().forEach(result => {
+        const entry = document.createElement("div");
+        entry.className = "log-entry";
+        entry.innerHTML = formatResults(result);
+
+        if (expandLogButton.innerText.startsWith("Collapse")) {
+            entry.style.display = "block";
+        } else {
+            entry.style.display = "none";
+        }
+
+        logContainer.appendChild(entry);
+    });
 }
 
 
