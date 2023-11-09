@@ -18,7 +18,7 @@ buttons.forEach(button => {
 });
 
 changeDiceButton.addEventListener("click", () => {
-    contentDiv.style.display = "block";
+    contentDiv.style.display = "flex";
     changeDiceButton.classList.add("hidden");
     mainContainerDisplay.classList.add("hidden");
     rollButton.classList.remove("four-sided");
@@ -103,8 +103,8 @@ function rollDiceClick() {
         numOfDice: numOfDice,
         rollNumber: rollCount
     });
-    updateLog();
 
+    updateLog();
 }
 
 let rollCount = 0;
@@ -113,22 +113,22 @@ function formatResults(result) {
 
     if (result.numOfDice === 1) {
         return `<div class="log-entry">
-            <div>Roll #${result.rollNumber}</div>
-            <div>Dice: ${result.diceType} x 1</div>
-            <div>Result: ${result.individualResults.join(", ")}</div>
+            <div class="log-roll-number">Roll #${result.rollNumber}</div>
+            <div><span class="log-headers">Dice:</span> ${result.diceType} x 1</div>
+            <div><span class="log-headers">Result:</span> ${result.individualResults.join(", ")}</div>
         </div>
         <div class="lineBottom"></div>
         <br>`
     } else {
         return `<div class="log-entry">
-            <div>Roll #${result.rollNumber}</div>
-            <div>Dice: ${result.diceType} x ${result.numOfDice}</div>
-            <div>Rolls: ${result.individualResults.join(", ")}</div>
-            <div>Total: ${result.total}</div>
-            <div>Average: ${result.average}</div>
+            <div class="log-roll-number">Roll #${result.rollNumber}</div>
+            <div><span class="log-headers">Dice:</span> ${result.diceType} x ${result.numOfDice}</div>
+            <div><span class="log-headers">Rolls:</span> ${result.individualResults.join(", ")}</div>
+            <div><span class="log-headers">Total:</span> ${result.total}</div>
+            <div><span class="log-headers">Average:</span> ${result.average}</div>
         </div>
         <div class="lineBottom"></div>
-        <br>`;
+        <br>`
     }
 }
 
@@ -137,42 +137,53 @@ let resultsArray = [];
 const expandLogButton = document.getElementById("expandLogButton");
 const logContainer = document.querySelector(".log-container");
 
-expandLogButton.addEventListener("click", () => {
 
+expandLogButton.addEventListener("click", () => {
     if (resultsArray.length > 0) {
-        Array.from(logContainer.children).forEach(child => {
-            if (child !== expandLogButton) {
-                if (child.style.display === "none" || !child.style.display) {
-                    child.style.display = "block";
-                } else {
-                    child.style.display = "none";
-                }
-            }
-        });
-        expandLogButton.innerText = expandLogButton.innerText.startsWith("Expand") ? "Close Results Log" : "Expand Results Log";
+        isLogExpanded = !isLogExpanded;
+        updateLog();
+        expandLogButton.innerText = isLogExpanded ? "Close Results Log" : "Expand Results Log";
+        logContainer.classList.remove("hidden");
     }
 });
 
 let isLogExpanded = false;
 
 function updateLog() {
-    const logContainer = document.querySelector(".log-container");
-    const currentLogContent = logContainer.innerHTML;
 
+    const logContainer = document.querySelector(".log-container");
     logContainer.innerHTML = "";
+
+    const button = createButton()
+    logContainer.appendChild(button);
+
     resultsArray.slice().reverse().forEach(result => {
         const entry = document.createElement("div");
         entry.className = "log-entry";
         entry.innerHTML = formatResults(result);
-
-        if (expandLogButton.innerText.startsWith("Collapse")) {
-            entry.style.display = "block";
-        } else {
-            entry.style.display = "none";
-        }
-
+        entry.style.display = isLogExpanded ? "block" : "none";
         logContainer.appendChild(entry);
     });
+
+    logContainer.style.display = isLogExpanded ? "block" : "none";
+
+}
+
+function createButton() {
+    const button = document.createElement("img");
+    button.setAttribute("src", "https://img.icons8.com/emoji/96/Save.png");
+    button.setAttribute("alt", "Save Log Results");
+    button.setAttribute("title", "Download Your Roll Results");
+    button.classList.add("save-button");
+    button.addEventListener("click", function () {
+        downloadLog();
+    });
+
+    const buttonDiv = document.createElement("div");
+    buttonDiv.classList.add("save-button-container");
+    buttonDiv.appendChild(button);
+
+    return buttonDiv;
 }
 
 
@@ -225,4 +236,62 @@ function diceChoiceClick(event) {
         rollResult.innerHTML = "";
         rollButton.classList.add("twenty-sided");
     }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const cube = document.querySelector('.cube');
+
+    let cubeAnimation = cube.animate([
+        { transform: 'rotateX(0deg) rotateY(0deg)' },
+        { transform: 'rotateX(-360deg) rotateY(-360deg)' }
+    ], {
+        duration: 8000,
+        iterations: Infinity
+    });
+
+    cubeAnimation.play();
+
+    cubeAnimation.addEventListener('finish', function () {
+        if (cubeAnimation.playbackRate < 0) {
+            cubeAnimation.currentTime = cubeAnimation.effect.getTiming().duration;
+        }
+    });
+
+    cube.addEventListener('click', function () {
+        cubeAnimation.playbackRate *= -1;
+        if (cubeAnimation.playState == 'paused') {
+            cubeAnimation.play();
+        }
+    });
+
+});
+
+
+// if ('serviceWorker' in navigator) {
+//     navigator.serviceWorker.register('/service-worker.js')
+//         .then(function (registration) {
+//             console.log('Service Worker registered with scope:', registration.scope);
+//         })
+//         .catch(function (error) {
+//             console.log('Service Worker registration failed:', error);
+//         });
+// }
+
+
+function downloadLog() {
+    const logString = resultsArray.map(result => {
+        if (result.individualResults.length === 1) {
+            return `Roll #${result.rollNumber}, Dice: ${result.diceType}, Roll: ${result.individualResults.join(", ")}`
+        } else {
+            return `Roll #${result.rollNumber}, Dice: ${result.diceType} x ${result.numOfDice}, Rolls: ${result.individualResults.join(", ")}, Total: ${result.total}, Average: ${result.average}`
+        }
+    }).join('\n\n');
+
+    const blob = new Blob([logString], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.download = 'Dice Roll Log.txt';
+    link.href = window.URL.createObjectURL(blob);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }

@@ -17,8 +17,11 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
+        <link
+            href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Pixelify+Sans&family=Press+Start+2P&family=Quantico&display=swap"
+            rel="stylesheet">
+
+        <link rel="stylesheet" href="css/style.css">
         <title>Dice Rolls</title>
     </head>
 
@@ -26,7 +29,7 @@
         <div class="top-holder" id="content">
             <div class="dice-select">
                 <h1 class="select-title">Select Your Dice</h1>
-                <div>
+                <div class="button-top-holder">
                     <button class="dice-button" id="dice-button1" aria-label="Select a 4-sided dice (d4)"
                         title="Select a 4-sided dice">d4</button>
                     <button class="dice-button" id="dice-button2" aria-label="Select a 6-sided dice (d6)"
@@ -53,10 +56,23 @@
                     </h1>
                     <div class="num-of-dice-container">
                         <label for="num-of-dice" class="how-many">How many dice to roll: </label>
-                        <input type="text" class="num-of-dice" id="num-of-dice" min="1" max="99" step="1" value="1"
+                        <input type="number" class="num-of-dice" id="num-of-dice" min="1" max="99" step="1" value="1"
                             pattern="[1-9][0-9]?" maxlength="2" aria-labelledby="num-of-dice how-many">
                     </div>
-                    <button class="roll" id="roll-the-dice" aria-label="Roll the selected dice">Roll</button>
+
+                    <div class="cube-holder">
+                        <div class="scene">
+                            <div class="cube" id="roll-the-dice">
+                                <button class="face front">Click to Roll</button>
+                                <button class="face back">Click to Roll</button>
+                                <button class="face right">Click to Roll</button>
+                                <button class="face left">Click to Roll</button>
+                                <button class="face top">Click to Roll</button>
+                                <button class="face bottom">Click to Roll</button>
+                            </div>
+                        </div>
+                    </div>
+
                     <p class="roll-result-container"><span id="roll-result" class="roll-result-numbers"
                             aria-live="assertive" aria-atomic="true"></span></p>
                 </div>
@@ -72,13 +88,11 @@
 
             </div>
 
-            <div class="log-container-wrapper">
-                <div class="log-container"></div>
-            </div>
+            <div class="log-container"></div>
 
         </div>
 
-        <script src="app.js"></script>
+        <script src="js/app.js"></script>
     </body>
 
 </html>
