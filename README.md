@@ -6,6 +6,7 @@
 
 - [Overview](#overview)
 - [Features](#features)
+- [Live Demo](#live-demo)
 - [Built With](#built-with)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
@@ -22,6 +23,10 @@ Dice Rolls is a simple yet immersive app designed to simulate the rolling of var
 - **Results Log:** Keep track of your dice rolls with an expandable log that records each session.
 - **Save Results:** Export a text document with all your dice rolls easily from the full results log.
 - **Responsive Design:** Works seamlessly across various devices and screen sizes.
+
+## Live Demo
+
+[Click here to see the Live Site](https://tubajordan.github.io/Dice-Rolls/)
 
 ## Built With
 
